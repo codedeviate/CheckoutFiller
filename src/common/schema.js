@@ -104,7 +104,9 @@ export function validateConfig(config) {
 // Upgrade a stored config to the current CONFIG_VERSION. v1→v2 renames the
 // shipped provider key `klarna-kco` to `kustom-kco` in place (preserving menu
 // order and any user edits); the default label is updated, a custom label is
-// kept. Returns a new object; the input is not mutated.
+// kept. Returns a new object; the input is not mutated. Nested `fields`/`scenarios`
+// are shared references — fine for the load→migrate→read/save usage; deep-clone if
+// you later mutate them in place.
 export function migrateConfig(config) {
   if (!config || typeof config !== 'object' || !config.providers) return config;
   let providers = config.providers;
