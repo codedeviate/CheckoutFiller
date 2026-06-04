@@ -1,0 +1,21 @@
+{
+  "name": "checkoutfiller",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Fill checkout test credentials from the right-click menu.",
+  "scripts": {
+    "build": "node build.js",
+    "build:watch": "node build.js --watch",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "webextension-polyfill": "^0.12.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "jsdom": "^25.0.0",
+    "vitest": "^2.1.0"
+  }
+}
