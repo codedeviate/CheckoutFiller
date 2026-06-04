@@ -83,4 +83,21 @@ describe('detectLogicalKey', () => {
   it('does not treat a credit-card type selector as the card number', () => {
     expect(detectLogicalKey(input('<select name="credit_card_type"></select>'))).toBeNull();
   });
+
+  it('matches the bank/account fields', () => {
+    expect(detectLogicalKey(input('<input name="iban">'))).toBe('iban');
+    expect(detectLogicalKey(input('<input name="bic">'))).toBe('bic');
+    expect(detectLogicalKey(input('<input name="swift_code">'))).toBe('bic');
+    expect(detectLogicalKey(input('<input name="clearing_number">'))).toBe('bankClearing');
+    expect(detectLogicalKey(input('<input placeholder="Sort code">'))).toBe('bankClearing');
+    expect(detectLogicalKey(input('<input name="account_number">'))).toBe('bankAccount');
+    expect(detectLogicalKey(input('<input name="kontonummer">'))).toBe('bankAccount');
+    expect(detectLogicalKey(input('<input name="bankgiro">'))).toBe('bankgiro');
+    expect(detectLogicalKey(input('<input name="plusgiro">'))).toBe('plusgiro');
+  });
+
+  it('does not match bank tokens as substrings of unrelated names', () => {
+    expect(detectLogicalKey(input('<input name="caribana">'))).toBeNull(); // embeds "iban"
+    expect(detectLogicalKey(input('<input name="cubicle">'))).toBeNull();  // embeds "bic"
+  });
 });
