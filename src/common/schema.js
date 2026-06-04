@@ -46,6 +46,18 @@ export function fieldsForCategory(providerFields, cat) {
   return result;
 }
 
+// Merge a provider's base fields with the override of the scenario at
+// `scenarioIndex` (an integer, or null/undefined for "no scenario"). Falls back
+// to the base when the index is missing, out of range, or the provider has no
+// scenarios.
+export function scenarioFields(provider, scenarioIndex) {
+  const base = (provider && provider.fields) || {};
+  if (scenarioIndex == null || !Array.isArray(provider.scenarios)) return base;
+  const sc = provider.scenarios[scenarioIndex];
+  if (!sc || !sc.fields) return base;
+  return { ...base, ...sc.fields };
+}
+
 export function validateConfig(config) {
   const errors = [];
   if (!config || typeof config !== 'object') {

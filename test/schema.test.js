@@ -7,6 +7,7 @@ import {
   keysForCategory,
   fieldsForCategory,
   validateConfig,
+  scenarioFields,
 } from '../src/common/schema.js';
 
 describe('categories', () => {
@@ -80,5 +81,31 @@ describe('validateConfig', () => {
   it('rejects a provider missing a label', () => {
     const bad = { version: CONFIG_VERSION, providers: { p: { fields: {} } } };
     expect(validateConfig(bad).valid).toBe(false);
+  });
+});
+
+describe('scenarioFields', () => {
+  const provider = {
+    label: 'P',
+    fields: { email: 'a@b.c', ssn: 'base-ssn' },
+    scenarios: [
+      { label: 'Denied', fields: { ssn: 'denied-ssn' } },
+      { label: 'Swish', fields: { phone: '0700000000' } },
+    ],
+  };
+
+  it('returns the base fields when no scenario is selected', () => {
+    expect(scenarioFields(provider, null)).toEqual({ email: 'a@b.c', ssn: 'base-ssn' });
+  });
+
+  it('merges a scenario override onto the base', () => {
+    expect(scenarioFields(provider, 0)).toEqual({ email: 'a@b.c', ssn: 'denied-ssn' });
+    expect(scenarioFields(provider, 1)).toEqual({ email: 'a@b.c', ssn: 'base-ssn', phone: '0700000000' });
+  });
+
+  it('falls back to base for an out-of-range or scenario-less provider', () => {
+    expect(scenarioFields(provider, 5)).toEqual(provider.fields);
+    expect(scenarioFields({ label: 'X', fields: { email: 'x@y.z' } }, 0)).toEqual({ email: 'x@y.z' });
+    expect(scenarioFields({ label: 'X' }, null)).toEqual({});
   });
 });
