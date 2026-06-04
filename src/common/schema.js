@@ -80,6 +80,23 @@ export function validateConfig(config) {
     for (const fk of Object.keys(p.fields)) {
       if (!LOGICAL_KEYS.includes(fk)) errors.push(`provider ${key} has unknown field "${fk}"`);
     }
+    if (p.scenarios !== undefined) {
+      if (!Array.isArray(p.scenarios)) {
+        errors.push(`provider ${key} scenarios must be an array`);
+      } else {
+        p.scenarios.forEach((sc, i) => {
+          if (!sc || typeof sc !== 'object') { errors.push(`provider ${key} scenario ${i} must be an object`); return; }
+          if (!sc.label) errors.push(`provider ${key} scenario ${i} missing label`);
+          if (!sc.fields || typeof sc.fields !== 'object') {
+            errors.push(`provider ${key} scenario ${i} missing fields`);
+            return;
+          }
+          for (const fk of Object.keys(sc.fields)) {
+            if (!LOGICAL_KEYS.includes(fk)) errors.push(`provider ${key} scenario ${i} has unknown field "${fk}"`);
+          }
+        });
+      }
+    }
   }
   return { valid: errors.length === 0, errors };
 }

@@ -82,6 +82,34 @@ describe('validateConfig', () => {
     const bad = { version: CONFIG_VERSION, providers: { p: { fields: {} } } };
     expect(validateConfig(bad).valid).toBe(false);
   });
+
+  it('accepts a provider with valid scenarios', () => {
+    const cfg = {
+      version: CONFIG_VERSION,
+      providers: {
+        p: {
+          label: 'P',
+          fields: { email: 'a@b.c' },
+          scenarios: [{ label: 'Denied', fields: { ssn: 'x', iban: 'y' } }],
+        },
+      },
+    };
+    expect(validateConfig(cfg)).toEqual({ valid: true, errors: [] });
+  });
+
+  it('rejects scenarios that are not an array', () => {
+    const cfg = { version: CONFIG_VERSION, providers: { p: { label: 'P', fields: {}, scenarios: {} } } };
+    expect(validateConfig(cfg).valid).toBe(false);
+  });
+
+  it('rejects a scenario missing a label or with an unknown field', () => {
+    const noLabel = { version: CONFIG_VERSION, providers: { p: { label: 'P', fields: {}, scenarios: [{ fields: {} }] } } };
+    expect(validateConfig(noLabel).valid).toBe(false);
+    const badKey = { version: CONFIG_VERSION, providers: { p: { label: 'P', fields: {}, scenarios: [{ label: 'S', fields: { nope: 'x' } }] } } };
+    const res = validateConfig(badKey);
+    expect(res.valid).toBe(false);
+    expect(res.errors.join(' ')).toMatch(/unknown field/);
+  });
 });
 
 describe('scenarioFields', () => {
