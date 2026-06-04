@@ -1,6 +1,6 @@
 import browser from 'webextension-polyfill';
 import { loadConfig, seedDefaults, CONFIG_KEY } from '../common/storage.js';
-import { fieldsForCategory, scenarioFields } from '../common/schema.js';
+import { fieldsForCategory, scenarioFields, autoRefillEnabled } from '../common/schema.js';
 import { parseMenuId, createMenuRebuilder } from './menus.js';
 
 // Serialized so overlapping triggers (onInstalled + the seed-write's
@@ -48,10 +48,11 @@ browser.contextMenus.onClicked.addListener(async (info, tab) => {
   const provider = config.providers[pkey];
   if (!provider) return;
   const fields = fieldsForCategory(scenarioFields(provider, scenario), cat);
+  const autoRefill = autoRefillEnabled(config);
   try {
     const res = await browser.tabs.sendMessage(
       tab.id,
-      { type: 'CHECKOUTFILLER_FILL', fields },
+      { type: 'CHECKOUTFILLER_FILL', fields, autoRefill },
       { frameId: info.frameId },
     );
     await flashBadge(res && res.count ? String(res.count) : '0');
