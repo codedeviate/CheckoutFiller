@@ -104,17 +104,25 @@ install.
 
 ```jsonc
 {
-  "version": 1,
+  "version": 2,
   "providers": {
     "<provider-key>": {
       "label": "Shown in the menu",
       "fields": {
-        // any subset of the logical keys below
+        // any subset of the logical keys below (the provider's base data)
         "email": "...", "phone": "...", "firstName": "...", "lastName": "...",
         "ssn": "...", "address1": "...", "postalCode": "...", "city": "...",
         "country": "SE", "cardNumber": "...", "cardExp": "MM/YY",
-        "cardCvc": "...", "cardName": "..."
-      }
+        "cardCvc": "...", "cardName": "...",
+        "bankClearing": "...", "bankAccount": "...", "iban": "...", "bic": "...",
+        "bankgiro": "...", "plusgiro": "..."
+      },
+      // optional: payment-method / outcome variants, each overriding a subset
+      // of the base fields above. Adds a scenario level to the menu.
+      "scenarios": [
+        { "label": "Card · Declined", "fields": { "cardNumber": "..." } },
+        { "label": "Swish · Accepted", "fields": { "phone": "..." } }
+      ]
     }
   }
 }

@@ -70,9 +70,10 @@ are verified by loading the extension. Tests cover only the pure modules.
 - **Native setter, then events.** `setNativeValue` walks the prototype chain to the
   native `value` setter; a plain `el.value =` is swallowed by React. After setting,
   always dispatch `input`, `change`, `blur`.
-- **Menu IDs** are `fill:<providerKey>:<category>`. The category is the segment
-  after the **last** colon (provider keys are user-editable JSON and may contain
-  colons) — see `parseMenuId` in `src/background/menus.js`.
+- **Menu IDs** are `fill:<providerKey>:<scenarioToken>:<category>`. `parseMenuId`
+  (`src/background/menus.js`) pops `category` (last colon-segment) then
+  `scenarioToken` (next; `-` → no scenario, else an index), leaving the remainder
+  — which may itself contain colons — as the provider key.
 - **Menu rebuilds are serialized** via `createMenuRebuilder` (`menus.js`). Multiple
   triggers (`onInstalled` plus the seed-write's `storage.onChanged`, `onStartup`,
   config edits) can fire concurrently; without serialization the overlapping
