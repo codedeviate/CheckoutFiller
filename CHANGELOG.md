@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Context menu no longer throws "Cannot create item with duplicate id" on
+  install/reload. Menu rebuilds are now serialized (`createMenuRebuilder`) so the
+  concurrent triggers (`onInstalled` plus the seed-write's `storage.onChanged`)
+  can't race their `removeAll`→`create` sequences. Menu construction and ID
+  parsing were extracted to `src/background/menus.js` and unit-tested.
+
 ## [0.1.0] - 2026-06-04
 
 ### Added

@@ -60,7 +60,8 @@ are verified by loading the extension. Tests cover only the pure modules.
 | `src/common/storage.js` | `loadConfig`/`saveConfig`/`seedDefaults` over `browser.storage.local`, seeded from defaults. | manual |
 | `src/config/defaults.json` | Shipped provider test credentials. Validated against `schema.js`. | — |
 | `src/content/index.js` | Content entry: recorder + fill message handler. | manual |
-| `src/background/service-worker.js` | Builds menus, routes clicks, badge. | manual |
+| `src/background/menus.js` | `menuItems` (pure descriptors), `parseMenuId`, `createMenuRebuilder` (serialized removeAll→create). | ✅ `test/menus.test.js` |
+| `src/background/service-worker.js` | Wires events: seed, build menus, route clicks, badge. | manual |
 | `src/options/options.{html,css,js}` | Config editor + JSON import/export. | manual |
 | `src/manifest.base.json` + `build.js` | Shared manifest + esbuild build emitting per-browser dist/. | manual |
 
@@ -71,7 +72,11 @@ are verified by loading the extension. Tests cover only the pure modules.
   always dispatch `input`, `change`, `blur`.
 - **Menu IDs** are `fill:<providerKey>:<category>`. The category is the segment
   after the **last** colon (provider keys are user-editable JSON and may contain
-  colons) — see `parseMenuId` in the service worker.
+  colons) — see `parseMenuId` in `src/background/menus.js`.
+- **Menu rebuilds are serialized** via `createMenuRebuilder` (`menus.js`). Multiple
+  triggers (`onInstalled` plus the seed-write's `storage.onChanged`, `onStartup`,
+  config edits) can fire concurrently; without serialization the overlapping
+  `removeAll`→`create` sequences cause "Cannot create item with duplicate id".
 - **Logical field keys** are the single source of truth in `schema.js` (`LOGICAL_KEYS`,
   `CATEGORIES`). The matcher returns these keys; `defaults.json` and the options
   validator use them. Adding a field means touching all three consistently.
