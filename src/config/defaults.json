@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "providers": {
     "generic": {
       "label": "Generic test card",
@@ -19,8 +19,8 @@
         "cardName": "Test Persson"
       }
     },
-    "klarna-kco": {
-      "label": "Klarna (KCO)",
+    "kustom-kco": {
+      "label": "Kustom (KCO)",
       "fields": {
         "email": "customer@email.se",
         "phone": "0701234567",
@@ -30,12 +30,13 @@
         "address1": "Sveavagen 1",
         "postalCode": "11157",
         "city": "Stockholm",
-        "country": "SE",
-        "cardNumber": "4111 1111 1111 1111",
-        "cardExp": "12/30",
-        "cardCvc": "123",
-        "cardName": "Test Persson"
-      }
+        "country": "SE"
+      },
+      "scenarios": [
+        { "label": "Invoice · Accepted", "fields": { "ssn": "4106288989" } },
+        { "label": "Invoice · Denied", "fields": { "ssn": "5902281234" } },
+        { "label": "Card · Accepted", "fields": { "cardNumber": "4111 1111 1111 1111", "cardExp": "12/30", "cardCvc": "123", "cardName": "Test Persson" } }
+      ]
     },
     "svea-sco": {
       "label": "Svea Checkout (SCO)",
@@ -82,6 +83,27 @@
         "city": "Stockholm",
         "country": "SE"
       }
+    },
+    "swedbankpay": {
+      "label": "SwedbankPay",
+      "fields": {
+        "email": "test@swedbankpay.com",
+        "phone": "0704444444",
+        "firstName": "Test",
+        "lastName": "Swedbank",
+        "ssn": "199001011234",
+        "address1": "Brunkebergstorg 8",
+        "postalCode": "11151",
+        "city": "Stockholm",
+        "country": "SE"
+      },
+      "scenarios": [
+        { "label": "Card · Accepted", "fields": { "cardNumber": "4925 0000 0000 0004", "cardExp": "12/30", "cardCvc": "123", "cardName": "Test Swedbank" } },
+        { "label": "Card · Declined", "fields": { "cardNumber": "4000 0000 0000 0002", "cardExp": "12/30", "cardCvc": "123", "cardName": "Test Swedbank" } },
+        { "label": "Swish · Accepted", "fields": { "phone": "0700000001" } },
+        { "label": "Invoice · Review", "fields": { "ssn": "5902281234" } },
+        { "label": "Autogiro", "fields": { "bankClearing": "8327-9", "bankAccount": "1234567890" } }
+      ]
     }
   }
 }
