@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-06-04
+
+### Fixed
+- Corrected shipped test credentials to match official provider documentation:
+  - **Kustom (KCO):** approved personnummer `194103219202` and denied
+    `194110288083` (the denied scenario also sets the `customer+se+denied@klarna.com`
+    email Klarna uses to trigger that outcome). Card unchanged.
+  - **Nets / Nexi:** success Visa test card `4268 2700 8737 4847` (the prior
+    `4925…0004` is not the documented success card in the current Nexi portal).
+  - **Qliro:** approved personnummer `197906255307` (was an undocumented value).
+  - **SwedbankPay:** Swish number `0739000001` and invoice personnummer
+    `196003071161`; removed the "Card · Declined" scenario (Swedbank Pay triggers
+    declines via "magic amounts", not a declined card number, so it can't be
+    filled). Accepted card unchanged.
+- Verified as already-correct: Generic (`4242…`), Svea (`194605092222`), the
+  Kustom card, and the SwedbankPay accepted card.
+
+### Note
+- The SwedbankPay **Autogiro** scenario values (clearing/account) are not publicly
+  documented; the scenario is labelled "Autogiro (unverified)" and its values
+  remain placeholders to confirm via a Swedbank Pay test account.
+
 ## [0.3.0] - 2026-06-04
 
 ### Added
@@ -64,7 +86,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `dist/firefox` (MV3 background scripts + `browser_specific_settings.gecko`).
 - Vitest + jsdom test suite for the schema, matcher, and filler modules.
 
-[Unreleased]: https://github.com/codedeviate/CheckoutFiller/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/codedeviate/CheckoutFiller/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/codedeviate/CheckoutFiller/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/codedeviate/CheckoutFiller/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/codedeviate/CheckoutFiller/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/codedeviate/CheckoutFiller/releases/tag/v0.1.0

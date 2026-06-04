@@ -26,15 +26,15 @@
         "phone": "0701234567",
         "firstName": "Test",
         "lastName": "Persson",
-        "ssn": "4106288989",
+        "ssn": "194103219202",
         "address1": "Sveavagen 1",
         "postalCode": "11157",
         "city": "Stockholm",
         "country": "SE"
       },
       "scenarios": [
-        { "label": "Invoice · Accepted", "fields": { "ssn": "4106288989" } },
-        { "label": "Invoice · Denied", "fields": { "ssn": "5902281234" } },
+        { "label": "Invoice · Accepted", "fields": { "ssn": "194103219202" } },
+        { "label": "Invoice · Denied", "fields": { "ssn": "194110288083", "email": "customer+se+denied@klarna.com" } },
         { "label": "Card · Accepted", "fields": { "cardNumber": "4111 1111 1111 1111", "cardExp": "12/30", "cardCvc": "123", "cardName": "Test Persson" } }
       ]
     },
@@ -64,7 +64,7 @@
         "postalCode": "11121",
         "city": "Stockholm",
         "country": "SE",
-        "cardNumber": "4925 0000 0000 0004",
+        "cardNumber": "4268 2700 8737 4847",
         "cardExp": "12/30",
         "cardCvc": "123",
         "cardName": "Test Nets"
@@ -77,7 +77,7 @@
         "phone": "0703333333",
         "firstName": "Test",
         "lastName": "Qliro",
-        "ssn": "195401019896",
+        "ssn": "197906255307",
         "address1": "Sankt Eriksgatan 1",
         "postalCode": "11220",
         "city": "Stockholm",
@@ -91,7 +91,7 @@
         "phone": "0704444444",
         "firstName": "Test",
         "lastName": "Swedbank",
-        "ssn": "199001011234",
+        "ssn": "196003071161",
         "address1": "Brunkebergstorg 8",
         "postalCode": "11151",
         "city": "Stockholm",
@@ -99,10 +99,9 @@
       },
       "scenarios": [
         { "label": "Card · Accepted", "fields": { "cardNumber": "4925 0000 0000 0004", "cardExp": "12/30", "cardCvc": "123", "cardName": "Test Swedbank" } },
-        { "label": "Card · Declined", "fields": { "cardNumber": "4000 0000 0000 0002", "cardExp": "12/30", "cardCvc": "123", "cardName": "Test Swedbank" } },
-        { "label": "Swish · Accepted", "fields": { "phone": "0700000001" } },
-        { "label": "Invoice · Review", "fields": { "ssn": "5902281234" } },
-        { "label": "Autogiro", "fields": { "bankClearing": "8327-9", "bankAccount": "1234567890" } }
+        { "label": "Swish · Accepted", "fields": { "phone": "0739000001" } },
+        { "label": "Invoice", "fields": { "ssn": "196003071161" } },
+        { "label": "Autogiro (unverified)", "fields": { "bankClearing": "8327-9", "bankAccount": "1234567890" } }
       ]
     }
   }
