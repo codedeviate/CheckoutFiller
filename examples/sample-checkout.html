@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CheckoutFiller — sample checkout</title>
+    <style>
+      body { font: 15px/1.5 system-ui, sans-serif; margin: 40px; max-width: 480px; }
+      label { display: block; margin: 10px 0 2px; font-weight: 600; }
+      input, select { width: 100%; padding: 8px; box-sizing: border-box; }
+      fieldset { margin: 18px 0; }
+    </style>
+  </head>
+  <body>
+    <h1>Sample checkout</h1>
+    <p>Right-click inside the form → CheckoutFiller → pick a provider → category.</p>
+    <form>
+      <fieldset>
+        <legend>Customer</legend>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" />
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" type="tel" autocomplete="tel" />
+        <label for="fn">First name</label>
+        <input id="fn" name="firstName" autocomplete="given-name" />
+        <label for="ln">Last name</label>
+        <input id="ln" name="lastName" autocomplete="family-name" />
+        <label for="ssn">Personnummer</label>
+        <input id="ssn" name="personnummer" />
+      </fieldset>
+
+      <fieldset>
+        <legend>Address</legend>
+        <label for="addr">Street address</label>
+        <input id="addr" name="address1" autocomplete="address-line1" />
+        <label for="zip">Postal code</label>
+        <input id="zip" name="postalCode" autocomplete="postal-code" />
+        <label for="city">City</label>
+        <input id="city" name="city" autocomplete="address-level2" />
+        <label for="country">Country</label>
+        <select id="country" name="country" autocomplete="country">
+          <option value="">--</option>
+          <option value="SE">Sweden</option>
+          <option value="NO">Norway</option>
+          <option value="DK">Denmark</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>Card</legend>
+        <label for="cc">Card number</label>
+        <input id="cc" name="cardNumber" autocomplete="cc-number" />
+        <label for="exp">Expiry</label>
+        <input id="exp" name="cardExp" autocomplete="cc-exp" placeholder="MM/YY" />
+        <label for="cvc">CVC</label>
+        <input id="cvc" name="card_cvc" autocomplete="cc-csc" />
+        <label for="ccname">Name on card</label>
+        <input id="ccname" name="cardName" autocomplete="cc-name" />
+      </fieldset>
+
+      <button type="button">Pay (does nothing)</button>
+    </form>
+  </body>
+</html>
