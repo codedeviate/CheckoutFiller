@@ -50,7 +50,13 @@
         "postalCode": "11122",
         "city": "Stockholm",
         "country": "SE"
-      }
+      },
+      "scenarios": [
+        { "label": "Approved", "fields": { "ssn": "194605092222" } },
+        { "label": "Denied", "fields": { "ssn": "194610081111" } },
+        { "label": "Abuse / fraud flag", "fields": { "ssn": "194606082222" } },
+        { "label": "Credit limit reached", "fields": { "ssn": "194611071111" } }
+      ]
     },
     "nets": {
       "label": "Nets / Nexi",
@@ -82,7 +88,12 @@
         "postalCode": "11220",
         "city": "Stockholm",
         "country": "SE"
-      }
+      },
+      "scenarios": [
+        { "label": "Approved", "fields": { "ssn": "197906255307" } },
+        { "label": "On hold", "fields": { "ssn": "197705301773" } },
+        { "label": "Denied", "fields": { "ssn": "197504208104" } }
+      ]
     },
     "swedbankpay": {
       "label": "SwedbankPay",
