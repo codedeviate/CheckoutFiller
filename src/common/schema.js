@@ -52,7 +52,7 @@ export function fieldsForCategory(providerFields, cat) {
 // scenarios.
 export function scenarioFields(provider, scenarioIndex) {
   const base = (provider && provider.fields) || {};
-  if (scenarioIndex == null || !Array.isArray(provider.scenarios)) return base;
+  if (scenarioIndex == null || !Array.isArray(provider?.scenarios)) return base;
   const sc = provider.scenarios[scenarioIndex];
   if (!sc || !sc.fields) return base;
   return { ...base, ...sc.fields };
