@@ -154,7 +154,7 @@ install.
       "fields": {
         // any subset of the logical keys below (the provider's base data)
         "email": "...", "phone": "...", "firstName": "...", "lastName": "...",
-        "ssn": "...", "address1": "...", "postalCode": "...", "city": "...",
+        "ssn": "...", "companyName": "...", "address1": "...", "postalCode": "...", "city": "...",
         "country": "SE", "cardNumber": "...", "cardExp": "MM/YY",
         "cardCvc": "...", "cardName": "...",
         "bankClearing": "...", "bankAccount": "...", "iban": "...", "bic": "...",
@@ -176,7 +176,7 @@ Categories map to these logical keys:
 | Category          | Logical keys |
 |-------------------|--------------|
 | Card / payment    | `cardNumber`, `cardExp`, `cardCvc`, `cardName` |
-| Customer identity | `email`, `phone`, `firstName`, `lastName`, `ssn` |
+| Customer identity | `email`, `phone`, `firstName`, `lastName`, `ssn`, `companyName` |
 | Address           | `address1`, `postalCode`, `city`, `country` |
 | Personal number   | `ssn` only (quick-fill the national ID on its own) |
 | Bank / account    | `bankClearing`, `bankAccount`, `iban`, `bic`, `bankgiro`, `plusgiro` |

@@ -10,6 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - MIT license.
 
+## [0.6.0] - 2026-06-05
+
+### Added
+- **B2B (company) scenario** for Kustom (KCO), Svea (SCO), and Qliro — fills a test
+  company org number into the NEH `orgno` field plus a company name. New
+  `companyName` logical key (in the Customer identity category), matched on
+  `company`/`företag`/`business name`/`firm`. Org number `556001-1982` is a flagged
+  default — verify per provider.
+
 ## [0.5.1] - 2026-06-05
 
 ### Fixed
@@ -149,7 +158,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `dist/firefox` (MV3 background scripts + `browser_specific_settings.gecko`).
 - Vitest + jsdom test suite for the schema, matcher, and filler modules.
 
-[Unreleased]: https://github.com/codedeviate/CheckoutFiller/compare/v0.5.1...HEAD
+[Unreleased]: https://github.com/codedeviate/CheckoutFiller/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/codedeviate/CheckoutFiller/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/codedeviate/CheckoutFiller/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.4...v0.5.0
 [0.4.4]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.3...v0.4.4
