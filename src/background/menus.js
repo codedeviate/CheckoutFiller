@@ -4,34 +4,52 @@ export const FILL_PREFIX = 'fill:';
 const CONTEXTS = ['editable', 'page'];
 
 // Build the full list of context-menu item descriptors for a config.
-// Pure — performs no browser calls.
+// Pure — performs no browser calls. Leaf fill ids are
+// `fill:<pkey>:<scenarioToken>:<cat>` where scenarioToken is the scenario index
+// or `-` when the provider has no scenarios.
 export function menuItems(config) {
   const items = [{ id: 'checkoutfiller', title: 'CheckoutFiller', contexts: CONTEXTS }];
   for (const [pkey, provider] of Object.entries(config.providers)) {
     const pid = `provider:${pkey}`;
     items.push({ id: pid, parentId: 'checkoutfiller', title: provider.label, contexts: CONTEXTS });
-    for (const cat of Object.keys(CATEGORIES)) {
-      items.push({
-        id: `${FILL_PREFIX}${pkey}:${cat}`,
-        parentId: pid,
-        title: CATEGORY_LABELS[cat],
-        contexts: CONTEXTS,
+    const scenarios = Array.isArray(provider.scenarios) && provider.scenarios.length
+      ? provider.scenarios
+      : null;
+    if (scenarios) {
+      scenarios.forEach((sc, i) => {
+        const sid = `scenario:${pkey}:${i}`;
+        items.push({ id: sid, parentId: pid, title: sc.label, contexts: CONTEXTS });
+        for (const cat of Object.keys(CATEGORIES)) {
+          items.push({ id: `${FILL_PREFIX}${pkey}:${i}:${cat}`, parentId: sid, title: CATEGORY_LABELS[cat], contexts: CONTEXTS });
+        }
       });
+    } else {
+      for (const cat of Object.keys(CATEGORIES)) {
+        items.push({ id: `${FILL_PREFIX}${pkey}:-:${cat}`, parentId: pid, title: CATEGORY_LABELS[cat], contexts: CONTEXTS });
+      }
     }
   }
   return items;
 }
 
-// Menu ID = `fill:<providerKey>:<category>`. The category is always one of the
-// CATEGORIES keys (colon-free); provider keys are user-editable JSON and could
-// contain a colon, so take the category from the last colon and treat everything
-// before it as the key.
+// Menu ID = `fill:<providerKey>:<scenarioToken>:<category>`. Category is the last
+// colon-segment and scenarioToken the next; everything before them (which may
+// itself contain colons) is the provider key. scenarioToken `-` → scenario null,
+// otherwise an integer index.
 export function parseMenuId(id) {
   if (!id.startsWith(FILL_PREFIX)) return null;
-  const body = id.slice(FILL_PREFIX.length);
-  const lastColon = body.lastIndexOf(':');
-  if (lastColon === -1) return null;
-  return { pkey: body.slice(0, lastColon), cat: body.slice(lastColon + 1) };
+  const parts = id.slice(FILL_PREFIX.length).split(':');
+  if (parts.length < 3) return null;
+  const cat = parts.pop();
+  const scenarioToken = parts.pop();
+  const pkey = parts.join(':');
+  if (!pkey || !cat) return null;
+  let scenario = null;
+  if (scenarioToken !== '-') {
+    scenario = Number(scenarioToken);
+    if (!Number.isInteger(scenario) || scenario < 0) return null;
+  }
+  return { pkey, scenario, cat };
 }
 
 async function doRebuild(menus, loadConfig) {
