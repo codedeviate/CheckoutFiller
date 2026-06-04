@@ -1,14 +1,14 @@
 export const CONFIG_VERSION = 2;
 
 export const LOGICAL_KEYS = [
-  'email', 'phone', 'firstName', 'lastName', 'ssn',
+  'email', 'phone', 'firstName', 'lastName', 'ssn', 'companyName',
   'address1', 'postalCode', 'city', 'country',
   'cardNumber', 'cardExp', 'cardCvc', 'cardName',
   'bankClearing', 'bankAccount', 'iban', 'bic', 'bankgiro', 'plusgiro',
 ];
 
 const CARD_KEYS = ['cardNumber', 'cardExp', 'cardCvc', 'cardName'];
-const IDENTITY_KEYS = ['email', 'phone', 'firstName', 'lastName', 'ssn'];
+const IDENTITY_KEYS = ['email', 'phone', 'firstName', 'lastName', 'ssn', 'companyName'];
 const ADDRESS_KEYS = ['address1', 'postalCode', 'city', 'country'];
 const BANK_KEYS = ['bankClearing', 'bankAccount', 'iban', 'bic', 'bankgiro', 'plusgiro'];
 

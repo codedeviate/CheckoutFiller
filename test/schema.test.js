@@ -51,6 +51,11 @@ describe('categories', () => {
       expect(keysForCategory('all')).toContain(k);
     }
   });
+
+  it('includes companyName in LOGICAL_KEYS and the identity category', () => {
+    expect(LOGICAL_KEYS).toContain('companyName');
+    expect(keysForCategory('identity')).toContain('companyName');
+  });
 });
 
 describe('fieldsForCategory', () => {
