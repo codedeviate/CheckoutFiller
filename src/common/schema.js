@@ -100,3 +100,27 @@ export function validateConfig(config) {
   }
   return { valid: errors.length === 0, errors };
 }
+
+// Upgrade a stored config to the current CONFIG_VERSION. v1→v2 renames the
+// shipped provider key `klarna-kco` to `kustom-kco` in place (preserving menu
+// order and any user edits); the default label is updated, a custom label is
+// kept. Returns a new object; the input is not mutated.
+export function migrateConfig(config) {
+  if (!config || typeof config !== 'object' || !config.providers) return config;
+  let providers = config.providers;
+  if (providers['klarna-kco'] && !providers['kustom-kco']) {
+    const renamed = {};
+    for (const [key, p] of Object.entries(providers)) {
+      if (key === 'klarna-kco') {
+        const provider = { ...p };
+        if (provider.label === 'Klarna (KCO)') provider.label = 'Kustom (KCO)';
+        renamed['kustom-kco'] = provider;
+      } else {
+        renamed[key] = p;
+      }
+    }
+    providers = renamed;
+  }
+  if (providers === config.providers && config.version === CONFIG_VERSION) return config;
+  return { ...config, version: CONFIG_VERSION, providers };
+}

@@ -8,6 +8,7 @@ import {
   fieldsForCategory,
   validateConfig,
   scenarioFields,
+  migrateConfig,
 } from '../src/common/schema.js';
 
 describe('categories', () => {
@@ -135,5 +136,37 @@ describe('scenarioFields', () => {
     expect(scenarioFields(provider, 5)).toEqual(provider.fields);
     expect(scenarioFields({ label: 'X', fields: { email: 'x@y.z' } }, 0)).toEqual({ email: 'x@y.z' });
     expect(scenarioFields({ label: 'X' }, null)).toEqual({});
+  });
+});
+
+describe('migrateConfig', () => {
+  it('renames the legacy klarna-kco key to kustom-kco and updates the default label', () => {
+    const v1 = {
+      version: 1,
+      providers: {
+        generic: { label: 'Generic test card', fields: { email: 'g@x.c' } },
+        'klarna-kco': { label: 'Klarna (KCO)', fields: { ssn: '123' } },
+      },
+    };
+    const out = migrateConfig(v1);
+    expect(out.version).toBe(CONFIG_VERSION);
+    expect(out.providers['klarna-kco']).toBeUndefined();
+    expect(out.providers['kustom-kco']).toEqual({ label: 'Kustom (KCO)', fields: { ssn: '123' } });
+    expect(Object.keys(out.providers)).toEqual(['generic', 'kustom-kco']);
+  });
+
+  it('preserves a user-customised label and field edits during rename', () => {
+    const v1 = {
+      version: 1,
+      providers: { 'klarna-kco': { label: 'My Klarna', fields: { ssn: 'edited' } } },
+    };
+    const out = migrateConfig(v1);
+    expect(out.providers['kustom-kco']).toEqual({ label: 'My Klarna', fields: { ssn: 'edited' } });
+  });
+
+  it('is idempotent and a no-op when kustom-kco already exists', () => {
+    const v2 = { version: CONFIG_VERSION, providers: { 'kustom-kco': { label: 'Kustom (KCO)', fields: {} } } };
+    expect(migrateConfig(v2)).toEqual(v2);
+    expect(migrateConfig(migrateConfig(v2))).toEqual(v2);
   });
 });
