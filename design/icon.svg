@@ -1,0 +1,37 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5B5BF0"/>
+      <stop offset="1" stop-color="#8B3DEE"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F6D079"/>
+      <stop offset="1" stop-color="#D9A23A"/>
+    </linearGradient>
+    <linearGradient id="pen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFB454"/>
+      <stop offset="1" stop-color="#F08A24"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Card: larger, more square-balanced, bolder corners -->
+  <rect x="26" y="52" width="204" height="152" rx="24" fill="url(#card)"/>
+  <!-- bold magnetic stripe -->
+  <rect x="26" y="78" width="204" height="30" fill="#241F52"/>
+  <!-- chip -->
+  <rect x="50" y="128" width="42" height="32" rx="7" fill="url(#chip)"/>
+  <line x1="71" y1="128" x2="71" y2="160" stroke="#A87C24" stroke-width="3"/>
+  <line x1="50" y1="144" x2="92" y2="144" stroke="#A87C24" stroke-width="3"/>
+  <!-- one bold "active" data field -->
+  <rect x="108" y="130" width="94" height="14" rx="7" fill="#FFFFFF"/>
+  <rect x="50" y="174" width="120" height="12" rx="6" fill="#FFFFFF" opacity="0.5"/>
+
+  <!-- Chunky pen, clearly writing on the card -->
+  <g transform="rotate(40 196 150)">
+    <rect x="150" y="118" width="96" height="34" rx="12" fill="url(#pen)"/>
+    <rect x="150" y="118" width="20" height="34" rx="10" fill="#E07B14"/>
+    <rect x="238" y="120" width="16" height="30" rx="8" fill="#D96B0E"/>
+    <path d="M150 118 L124 135 L150 152 Z" fill="#C9CED6"/>
+    <path d="M136 129 L124 135 L136 141 Z" fill="#2E3138"/>
+  </g>
+</svg>

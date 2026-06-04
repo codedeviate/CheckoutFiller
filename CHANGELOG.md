@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.2] - 2026-06-04
+
+### Changed
+- Replaced the placeholder checkmark icon with a designed credit-card-and-pencil
+  icon (16/32/48/128 px). The SVG source and extra sizes (96/256) live in
+  `design/`; the README now shows the logo. Removed the old `tools/make-icons.js`
+  generator (superseded by the designed asset).
+
 ## [0.4.1] - 2026-06-04
 
 ### Added
@@ -101,7 +109,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `dist/firefox` (MV3 background scripts + `browser_specific_settings.gecko`).
 - Vitest + jsdom test suite for the schema, matcher, and filler modules.
 
-[Unreleased]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.1...HEAD
+[Unreleased]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.2...HEAD
+[0.4.2]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/codedeviate/CheckoutFiller/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/codedeviate/CheckoutFiller/compare/v0.3.0...v0.3.1

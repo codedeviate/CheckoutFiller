@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="design/icon.svg" alt="CheckoutFiller icon" width="96" height="96">
+</p>
+
 # CheckoutFiller
 
 A Manifest V3 browser extension that fills **checkout test credentials** into the
