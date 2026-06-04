@@ -80,6 +80,11 @@ are verified by loading the extension. Tests cover only the pure modules.
 - **Logical field keys** are the single source of truth in `schema.js` (`LOGICAL_KEYS`,
   `CATEGORIES`). The matcher returns these keys; `defaults.json` and the options
   validator use them. Adding a field means touching all three consistently.
+- **Scenarios** are an optional `scenarios: [{label, fields}]` array on a provider;
+  fill = base `fields` merged with the chosen scenario's override
+  (`scenarioFields`). Menu leaf ids are `fill:<pkey>:<scenarioToken>:<cat>`
+  (`scenarioToken` = index or `-`). `migrateConfig` (schema.js) upgrades stored v1
+  configs (renames `klarna-kco` → `kustom-kco`); `CONFIG_VERSION` is 2.
 - **Two manifests** are generated from `manifest.base.json` in `build.js`: Chrome
   uses `background.service_worker`; Firefox uses `background.scripts` +
   `browser_specific_settings.gecko`. esbuild outputs IIFE bundles that work for both.

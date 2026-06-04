@@ -20,13 +20,19 @@ address.
 right-click inside a checkout form
    └─ CheckoutFiller
         ├─ Generic test card ┐
-        ├─ Klarna (KCO)       │   each provider expands to:
+        ├─ Kustom (KCO)       │   each provider expands to:
         ├─ Svea Checkout (SCO)├─►   ├─ Card / payment
         ├─ Nets / Nexi        │     ├─ Customer identity
-        └─ Qliro             ┘     ├─ Address
-                                    ├─ Personal number
+        ├─ Qliro              │     ├─ Address
+        └─ SwedbankPay       ┘     ├─ Personal number
+                                    ├─ Bank / account
                                     └─ Fill everything
 ```
+
+Some providers add a **scenario** level (provider → scenario → category) for
+payment-method and outcome variants like "Card · Declined", "Swish · Accepted", or
+"Invoice · Review". Scenarios are defined per provider in the config; providers
+without them go straight to the category list.
 
 One click on a category fills every recognized field for it. The toolbar badge
 briefly shows how many fields were filled.
@@ -122,6 +128,7 @@ Categories map to these logical keys:
 | Customer identity | `email`, `phone`, `firstName`, `lastName`, `ssn` |
 | Address           | `address1`, `postalCode`, `city`, `country` |
 | Personal number   | `ssn` only (quick-fill the national ID on its own) |
+| Bank / account    | `bankClearing`, `bankAccount`, `iban`, `bic`, `bankgiro`, `plusgiro` |
 | Fill everything   | all of the above |
 
 ---

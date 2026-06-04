@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "CheckoutFiller",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Fill checkout test credentials from the right-click menu. Fills, never submits.",
   "permissions": [
     "contextMenus",
