@@ -1,8 +1,8 @@
 import browser from 'webextension-polyfill';
 import { loadConfig, seedDefaults, CONFIG_KEY } from '../common/storage.js';
-import { CATEGORY_LABELS, fieldsForCategory } from '../common/schema.js';
+import { CATEGORIES, CATEGORY_LABELS, fieldsForCategory } from '../common/schema.js';
 
-const CATS = ['card', 'identity', 'address', 'all'];
+const CATS = Object.keys(CATEGORIES);
 const CONTEXTS = ['editable', 'page'];
 
 async function buildMenus() {
