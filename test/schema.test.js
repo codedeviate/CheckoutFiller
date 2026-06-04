@@ -9,6 +9,7 @@ import {
   validateConfig,
   scenarioFields,
   migrateConfig,
+  autoRefillEnabled,
 } from '../src/common/schema.js';
 
 describe('categories', () => {
@@ -110,6 +111,34 @@ describe('validateConfig', () => {
     const res = validateConfig(badKey);
     expect(res.valid).toBe(false);
     expect(res.errors.join(' ')).toMatch(/unknown field/);
+  });
+
+  it('accepts an optional settings object', () => {
+    const cfg = { version: CONFIG_VERSION, settings: { autoRefill: true }, providers: { p: { label: 'P', fields: {} } } };
+    expect(validateConfig(cfg)).toEqual({ valid: true, errors: [] });
+  });
+
+  it('rejects a non-boolean settings.autoRefill', () => {
+    const cfg = { version: CONFIG_VERSION, settings: { autoRefill: 'yes' }, providers: { p: { label: 'P', fields: {} } } };
+    expect(validateConfig(cfg).valid).toBe(false);
+  });
+
+  it('rejects a non-object settings', () => {
+    const cfg = { version: CONFIG_VERSION, settings: 'x', providers: { p: { label: 'P', fields: {} } } };
+    expect(validateConfig(cfg).valid).toBe(false);
+  });
+});
+
+describe('autoRefillEnabled', () => {
+  it('defaults to false when settings or the key is absent', () => {
+    expect(autoRefillEnabled({ version: CONFIG_VERSION, providers: {} })).toBe(false);
+    expect(autoRefillEnabled({ settings: {}, providers: {} })).toBe(false);
+    expect(autoRefillEnabled(null)).toBe(false);
+  });
+
+  it('is true only when settings.autoRefill is true', () => {
+    expect(autoRefillEnabled({ settings: { autoRefill: true }, providers: {} })).toBe(true);
+    expect(autoRefillEnabled({ settings: { autoRefill: false }, providers: {} })).toBe(false);
   });
 });
 

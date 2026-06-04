@@ -46,6 +46,10 @@ export function fieldsForCategory(providerFields, cat) {
   return result;
 }
 
+export function autoRefillEnabled(config) {
+  return Boolean(config && config.settings && config.settings.autoRefill);
+}
+
 // Merge a provider's base fields with the override of the scenario at
 // `scenarioIndex` (an integer, or null/undefined for "no scenario"). Falls back
 // to the base when the index is missing, out of range, or the provider has no
@@ -96,6 +100,13 @@ export function validateConfig(config) {
           }
         });
       }
+    }
+  }
+  if (config.settings !== undefined) {
+    if (typeof config.settings !== 'object' || config.settings === null || Array.isArray(config.settings)) {
+      errors.push('settings must be an object');
+    } else if (config.settings.autoRefill !== undefined && typeof config.settings.autoRefill !== 'boolean') {
+      errors.push('settings.autoRefill must be a boolean');
     }
   }
   return { valid: errors.length === 0, errors };
