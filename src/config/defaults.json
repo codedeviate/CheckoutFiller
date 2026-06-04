@@ -38,7 +38,8 @@
       "scenarios": [
         { "label": "Invoice · Accepted", "fields": { "ssn": "194103219202" } },
         { "label": "Invoice · Denied", "fields": { "ssn": "194110288083", "email": "customer+se+denied@klarna.com" } },
-        { "label": "Card · Accepted", "fields": { "cardNumber": "4111 1111 1111 1111", "cardExp": "12/30", "cardCvc": "123", "cardName": "Test Persson" } }
+        { "label": "Card · Accepted", "fields": { "cardNumber": "4111 1111 1111 1111", "cardExp": "12/30", "cardCvc": "123", "cardName": "Test Persson" } },
+        { "label": "B2B (company)", "fields": { "ssn": "556001-1982", "companyName": "Testbolaget AB" } }
       ]
     },
     "svea-sco": {
@@ -58,7 +59,8 @@
         { "label": "Approved", "fields": { "ssn": "194605092222" } },
         { "label": "Denied", "fields": { "ssn": "194610081111" } },
         { "label": "Abuse / fraud flag", "fields": { "ssn": "194606082222" } },
-        { "label": "Credit limit reached", "fields": { "ssn": "194611071111" } }
+        { "label": "Credit limit reached", "fields": { "ssn": "194611071111" } },
+        { "label": "B2B (company)", "fields": { "ssn": "556001-1982", "companyName": "Testbolaget AB" } }
       ]
     },
     "nets": {
@@ -99,7 +101,8 @@
       "scenarios": [
         { "label": "Approved", "fields": { "ssn": "197906255307" } },
         { "label": "On hold", "fields": { "ssn": "197705301773" } },
-        { "label": "Denied", "fields": { "ssn": "197504208104" } }
+        { "label": "Denied", "fields": { "ssn": "197504208104" } },
+        { "label": "B2B (company)", "fields": { "ssn": "556001-1982", "companyName": "Testbolaget AB" } }
       ]
     },
     "swedbankpay": {
