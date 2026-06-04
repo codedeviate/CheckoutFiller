@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CheckoutFiller Options</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <h1>CheckoutFiller</h1>
+    <p>Edit the JSON config below. Each provider maps logical field keys to test values.</p>
+    <textarea id="config" spellcheck="false"></textarea>
+    <div class="row">
+      <button id="save">Save</button>
+      <button id="reset">Reset to defaults</button>
+      <button id="export">Export JSON</button>
+      <button id="import">Import JSON</button>
+      <input type="file" id="file" accept="application/json" hidden />
+    </div>
+    <p id="status" class="status"></p>
+    <script src="options.js"></script>
+  </body>
+</html>
