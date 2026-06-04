@@ -204,4 +204,4 @@ checkout forms and same-origin fields.
 
 ## License
 
-Personal tool — not currently licensed for redistribution.
+[MIT](LICENSE) © 2026 Thomas Björk

@@ -3,6 +3,7 @@
   "version": "0.4.2",
   "private": true,
   "type": "module",
+  "license": "MIT",
   "description": "Fill checkout test credentials from the right-click menu.",
   "scripts": {
     "build": "node build.js",
