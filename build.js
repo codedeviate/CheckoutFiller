@@ -1,5 +1,5 @@
 import * as esbuild from 'esbuild';
-import { mkdirSync, rmSync, readFileSync, writeFileSync, copyFileSync } from 'fs';
+import { mkdirSync, rmSync, readFileSync, writeFileSync, copyFileSync, cpSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -41,6 +41,7 @@ function buildOptions(outdir) {
 function emitStatic(out, extra) {
   copyFileSync(resolve(SRC, 'options/options.html'), resolve(out, 'options.html'));
   copyFileSync(resolve(SRC, 'options/options.css'), resolve(out, 'options.css'));
+  cpSync(resolve(SRC, 'icons'), resolve(out, 'icons'), { recursive: true });
   writeFileSync(resolve(out, 'manifest.json'), JSON.stringify({ ...base, ...extra }, null, 2));
 }
 
