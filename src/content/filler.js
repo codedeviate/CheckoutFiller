@@ -63,3 +63,39 @@ export function fillScope(scope, fields) {
   }
   return filled;
 }
+
+// Arm a MutationObserver on `scope` (an element or document) that fills recognized
+// empty fields from `fields` as they appear, via fillScope. Sliding window: each
+// successful fill resets a windowMs timer; after windowMs idle — or on disarm() —
+// it disconnects. Returns { disarm, refill }.
+export function createAutoRefiller(scope, fields, options = {}) {
+  const windowMs = options.windowMs == null ? 15000 : options.windowMs;
+  const root = scope.nodeType === 9 ? (scope.documentElement || scope) : scope;
+  let timer = null;
+  let observer = null;
+  let armed = true;
+
+  function disarm() {
+    if (!armed) return;
+    armed = false;
+    if (timer) clearTimeout(timer);
+    if (observer) observer.disconnect();
+  }
+
+  function resetTimer() {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(disarm, windowMs);
+  }
+
+  function refill() {
+    if (!armed) return;
+    const filled = fillScope(scope, fields);
+    if (filled > 0) resetTimer();
+  }
+
+  observer = new MutationObserver(() => refill());
+  observer.observe(root, { childList: true, subtree: true });
+  resetTimer();
+
+  return { disarm, refill };
+}
