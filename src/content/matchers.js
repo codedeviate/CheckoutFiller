@@ -23,7 +23,7 @@ const AUTOCOMPLETE_MAP = {
 // (e.g. card_cvv) without matching as a substring of an unrelated word (e.g. export, csci).
 const NAME_PATTERNS = [
   ['cardNumber', /card.?number|cardnum|\bpan\b|ccnumber/i],
-  ['cardExp', /\bexp(?:iry|iration)?\b|exp[._-](?:month|year|date|m|y)|cc.?exp|valid.?thru/i],
+  ['cardExp', /expiry|expiration|\bexp\b|exp[._-](?:month|year|date|m|y)|cc.?exp|valid.?thru/i],
   ['cardCvc', /(?<![a-z])(?:cvc|cvv|csc)(?![a-z])|security.?code|card.?code/i],
   ['cardName', /card.?holder|name.?on.?card|cc.?name/i],
   ['iban', /(?<![a-z])iban(?![a-z])/i],
@@ -33,7 +33,7 @@ const NAME_PATTERNS = [
   ['plusgiro', /plusgiro|postgiro/i],
   ['bankAccount', /account.?(?:no|nr|number)|kontonummer|bankkonto|(?<![a-z])konto(?![a-z])/i],
   ['email', /e.?mail/i],
-  ['ssn', /(?<![a-z])(?:ssn|pnr|nin|fnr|cpr|hetu)(?![a-z])|personnummer|person.?id|national.?id|national.?identification|social.?security|f(?:ø|o)dselsnummer|henkilotunnus|henkilötunnus/i],
+  ['ssn', /(?<![a-z])(?:ssn|pnr|nin|fnr|cpr|hetu)(?![a-z])|personnummer|personal.?number|person.?id|national.?id|national.?identification|social.?security|f(?:ø|o)dselsnummer|henkilotunnus|henkilötunnus/i],
   ['phone', /phone|mobile|\btel\b|telephone/i],
   ['firstName', /first.?name|given.?name|\bfname\b|forename/i],
   ['lastName', /last.?name|family.?name|surname|\blname\b/i],
@@ -89,9 +89,12 @@ export function detectLogicalKey(el) {
     if (re.test(haystack)) return key;
   }
 
+  // Last resort: only the email input type is a reliable signal. A bare type=tel
+  // is NOT — providers (e.g. Qliro) render personnummer/card/cvc as type=tel, so
+  // assuming tel⇒phone mis-fills those. Real phone fields carry name/autocomplete
+  // hints matched above.
   const type = (el.getAttribute('type') || '').toLowerCase();
   if (type === 'email') return 'email';
-  if (type === 'tel') return 'phone';
 
   return null;
 }

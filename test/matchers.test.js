@@ -50,9 +50,28 @@ describe('detectLogicalKey', () => {
     expect(detectLogicalKey(input('<input placeholder="Your e-mail">'))).toBe('email');
   });
 
-  it('falls back to input type', () => {
+  it('falls back to the email input type, but NOT bare tel', () => {
     expect(detectLogicalKey(input('<input type="email">'))).toBe('email');
-    expect(detectLogicalKey(input('<input type="tel">'))).toBe('phone');
+    // A bare type=tel with no name/label/autocomplete hint is NOT assumed to be a
+    // phone — numeric fields (personnummer, card, cvc) also use type=tel.
+    expect(detectLogicalKey(input('<input type="tel">'))).toBeNull();
+  });
+
+  // Regression: Qliro renders numeric fields as type=tel + autocomplete=off with
+  // camelCase English names and no linked <label>. The personal-number field was
+  // wrongly detected as `phone` via the old tel→phone fallback.
+  it('matches a Qliro-style personal-number field as ssn, not phone', () => {
+    expect(detectLogicalKey(input('<input type="tel" name="personalNumber" autocomplete="off">'))).toBe('ssn');
+  });
+
+  it('still detects real phone fields without the tel fallback', () => {
+    expect(detectLogicalKey(input('<input type="tel" name="phone" autocomplete="tel">'))).toBe('phone');
+    expect(detectLogicalKey(input('<input autocomplete="tel">'))).toBe('phone');
+    expect(detectLogicalKey(input('<input name="mobilePhone">'))).toBe('phone');
+  });
+
+  it('matches a camelCase card-expiry field name', () => {
+    expect(detectLogicalKey(input('<input type="tel" name="cardExpiry" autocomplete="off">'))).toBe('cardExp');
   });
 
   it('returns null for unfillable or unknown inputs', () => {

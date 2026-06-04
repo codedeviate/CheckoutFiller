@@ -10,6 +10,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - MIT license.
 
+## [0.4.3] - 2026-06-04
+
+### Fixed
+- Provider personal-number fields (e.g. Qliro) were filled with a **phone number**.
+  Root cause: such providers render numeric fields as `type="tel"` with
+  `autocomplete="off"` and English camelCase names, and our matcher fell through to
+  an unreliable `type="tel"` → `phone` fallback. Removed that fallback (real phone
+  fields are matched by `name`/`autocomplete`, verified against Qliro's
+  `name="phone"`/`autocomplete="tel"` field), added recognition of the
+  `personalNumber` field name (→ `ssn`), and broadened card-expiry matching to
+  catch `cardExpiry`/`expiryDate`.
+
 ## [0.4.2] - 2026-06-04
 
 ### Changed
@@ -112,7 +124,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `dist/firefox` (MV3 background scripts + `browser_specific_settings.gecko`).
 - Vitest + jsdom test suite for the schema, matcher, and filler modules.
 
-[Unreleased]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.2...HEAD
+[Unreleased]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.3...HEAD
+[0.4.3]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/codedeviate/CheckoutFiller/compare/v0.3.1...v0.4.0

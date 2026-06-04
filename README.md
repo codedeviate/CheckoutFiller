@@ -49,7 +49,9 @@ iframes are out of reach — see [Known limitation](#known-limitation).)
 
 **Field matching.** Each form input is mapped to a logical field key by heuristics,
 in priority order: `autocomplete` attribute → `name`/`id`/`placeholder`/`<label>`
-text → input `type`. Already-filled fields are skipped.
+text → input `type` (email only — a bare `type="tel"` is not assumed to be a phone,
+since providers render personnummer/card fields as `tel`). Already-filled fields are
+skipped.
 
 **Value setting.** Values are written through the native `value` setter (walking
 the prototype chain) and then `input`, `change`, and `blur` events are dispatched —
