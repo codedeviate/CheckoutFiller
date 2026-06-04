@@ -34,8 +34,23 @@ async function flashBadge(text) {
   }
 }
 
+// Menu ID = `fill:<providerKey>:<category>`. The category is always one of CATS
+// (colon-free); provider keys are user-editable JSON and could contain a colon, so
+// take the category from the last colon and treat everything before it as the key.
+function parseMenuId(id) {
+  const body = id.slice('fill:'.length);
+  const lastColon = body.lastIndexOf(':');
+  if (lastColon === -1) return null;
+  return { pkey: body.slice(0, lastColon), cat: body.slice(lastColon + 1) };
+}
+
 browser.runtime.onInstalled.addListener(async () => {
   await seedDefaults();
+  try {
+    await browser.action.setBadgeBackgroundColor({ color: '#2a8a3e' });
+  } catch {
+    /* action API unavailable; ignore */
+  }
   await buildMenus();
 });
 
@@ -44,13 +59,17 @@ if (browser.runtime.onStartup) {
 }
 
 browser.storage.onChanged.addListener((changes, area) => {
-  if (area === 'local' && changes[CONFIG_KEY]) buildMenus();
+  if (area === 'local' && changes[CONFIG_KEY]) {
+    buildMenus().catch(() => { /* menu rebuild failed; non-fatal */ });
+  }
 });
 
 browser.contextMenus.onClicked.addListener(async (info, tab) => {
   const id = String(info.menuItemId);
   if (!id.startsWith('fill:') || !tab) return;
-  const [, pkey, cat] = id.split(':');
+  const parsed = parseMenuId(id);
+  if (!parsed) return;
+  const { pkey, cat } = parsed;
   const config = await loadConfig();
   const provider = config.providers[pkey];
   if (!provider) return;
