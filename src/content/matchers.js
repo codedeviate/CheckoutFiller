@@ -17,10 +17,14 @@ const AUTOCOMPLETE_MAP = {
 };
 
 // Order matters: more specific patterns first so "email address" hits email, not address.
+// Some patterns target Swedish field names: "adress" (address), "ort" (city), "land"
+// (country), "personnummer"/"pnr" (national ID). These spellings are intentional.
+// Short tokens use lookarounds rather than \b so they still match across underscores
+// (e.g. card_cvv) without matching as a substring of an unrelated word (e.g. export, csci).
 const NAME_PATTERNS = [
-  ['cardNumber', /card.?number|cardnum|\bpan\b|ccnumber|credit.?card/i],
-  ['cardExp', /exp(iry|iration)?|cc.?exp|valid.?thru/i],
-  ['cardCvc', /cvc|cvv|csc|security.?code|card.?code/i],
+  ['cardNumber', /card.?number|cardnum|\bpan\b|ccnumber/i],
+  ['cardExp', /\bexp(?:iry|iration)?\b|exp[._-](?:month|year|date|m|y)|cc.?exp|valid.?thru/i],
+  ['cardCvc', /(?<![a-z])(?:cvc|cvv|csc)(?![a-z])|security.?code|card.?code/i],
   ['cardName', /card.?holder|name.?on.?card|cc.?name/i],
   ['email', /e.?mail/i],
   ['ssn', /\bssn\b|personnummer|person.?id|national.?id|\bpnr\b|social.?security/i],

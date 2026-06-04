@@ -50,4 +50,22 @@ describe('detectLogicalKey', () => {
   it('detects a select element', () => {
     expect(detectLogicalKey(input('<select name="country"></select>'))).toBe('country');
   });
+
+  it('autocomplete wins over a conflicting name', () => {
+    expect(detectLogicalKey(input('<input autocomplete="tel" name="email">'))).toBe('phone');
+  });
+
+  it('matches expiry across separators but not unrelated "exp" words', () => {
+    expect(detectLogicalKey(input('<input name="exp_month">'))).toBe('cardExp');
+    expect(detectLogicalKey(input('<input name="card-expiry">'))).toBe('cardExp');
+    expect(detectLogicalKey(input('<input name="export_format">'))).toBeNull();
+  });
+
+  it('does not match cvc/csc as a substring of unrelated names', () => {
+    expect(detectLogicalKey(input('<input name="csci_value">'))).toBeNull();
+  });
+
+  it('does not treat a credit-card type selector as the card number', () => {
+    expect(detectLogicalKey(input('<select name="credit_card_type"></select>'))).toBeNull();
+  });
 });
