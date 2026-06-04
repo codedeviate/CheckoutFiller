@@ -87,7 +87,11 @@
         "address1": "Sankt Eriksgatan 1",
         "postalCode": "11220",
         "city": "Stockholm",
-        "country": "SE"
+        "country": "SE",
+        "cardNumber": "4111 1111 1111 1111",
+        "cardExp": "12/30",
+        "cardCvc": "123",
+        "cardName": "Test Qliro"
       },
       "scenarios": [
         { "label": "Approved", "fields": { "ssn": "197906255307" } },

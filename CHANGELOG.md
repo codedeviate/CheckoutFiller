@@ -10,6 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - MIT license.
 
+## [0.4.4] - 2026-06-04
+
+### Added
+- Test card data for the **Qliro** provider (`4111 1111 1111 1111`), so
+  "Qliro → Card / payment" / "Fill everything" fills the card step. (Qliro's card
+  form is a nested third-party PaymentIQ hosted-field iframe, which the content
+  script reaches; it previously did nothing only because the Qliro config carried
+  no card.)
+
 ## [0.4.3] - 2026-06-04
 
 ### Fixed
@@ -124,7 +133,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `dist/firefox` (MV3 background scripts + `browser_specific_settings.gecko`).
 - Vitest + jsdom test suite for the schema, matcher, and filler modules.
 
-[Unreleased]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.3...HEAD
+[Unreleased]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.4...HEAD
+[0.4.4]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.0...v0.4.1
