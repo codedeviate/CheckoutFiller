@@ -26,9 +26,14 @@ describe('categories', () => {
   });
 
   it('labels every category including all', () => {
-    for (const cat of ['card', 'identity', 'address', 'all']) {
+    for (const cat of ['card', 'identity', 'address', 'ssn', 'all']) {
       expect(CATEGORY_LABELS[cat]).toBeTruthy();
     }
+  });
+
+  it('has a dedicated personal-number (ssn) category', () => {
+    expect(keysForCategory('ssn')).toEqual(['ssn']);
+    expect(CATEGORY_LABELS.ssn).toBe('Personal number');
   });
 });
 

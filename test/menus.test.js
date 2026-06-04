@@ -6,8 +6,8 @@ const oneProvider = { version: 1, providers: { p: { label: 'P', fields: {} } } }
 describe('menuItems', () => {
   it('emits root + provider + one item per category', () => {
     const items = menuItems(oneProvider);
-    // 1 root + 1 provider + 4 categories
-    expect(items).toHaveLength(6);
+    // 1 root + 1 provider + 5 categories (card, identity, address, ssn, all)
+    expect(items).toHaveLength(7);
     expect(items[0].id).toBe('checkoutfiller');
     expect(items.map((i) => i.id)).toContain('provider:p');
     expect(items.map((i) => i.id)).toEqual(
@@ -15,6 +15,7 @@ describe('menuItems', () => {
         'fill:p:card',
         'fill:p:identity',
         'fill:p:address',
+        'fill:p:ssn',
         'fill:p:all',
       ]),
     );
@@ -63,6 +64,6 @@ describe('createMenuRebuilder concurrency', () => {
     await Promise.all([rebuild(), rebuild(), rebuild()]);
 
     expect(menus.live.has('checkoutfiller')).toBe(true);
-    expect(menus.live.size).toBe(6);
+    expect(menus.live.size).toBe(7);
   });
 });

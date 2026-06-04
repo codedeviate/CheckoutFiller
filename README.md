@@ -24,6 +24,7 @@ right-click inside a checkout form
         ├─ Svea Checkout (SCO)├─►   ├─ Card / payment
         ├─ Nets / Nexi        │     ├─ Customer identity
         └─ Qliro             ┘     ├─ Address
+                                    ├─ Personal number
                                     └─ Fill everything
 ```
 
@@ -120,6 +121,7 @@ Categories map to these logical keys:
 | Card / payment    | `cardNumber`, `cardExp`, `cardCvc`, `cardName` |
 | Customer identity | `email`, `phone`, `firstName`, `lastName`, `ssn` |
 | Address           | `address1`, `postalCode`, `city`, `country` |
+| Personal number   | `ssn` only (quick-fill the national ID on its own) |
 | Fill everything   | all of the above |
 
 ---

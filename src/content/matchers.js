@@ -27,7 +27,7 @@ const NAME_PATTERNS = [
   ['cardCvc', /(?<![a-z])(?:cvc|cvv|csc)(?![a-z])|security.?code|card.?code/i],
   ['cardName', /card.?holder|name.?on.?card|cc.?name/i],
   ['email', /e.?mail/i],
-  ['ssn', /\bssn\b|personnummer|person.?id|national.?id|\bpnr\b|social.?security/i],
+  ['ssn', /(?<![a-z])(?:ssn|pnr|nin|fnr|cpr|hetu)(?![a-z])|personnummer|person.?id|national.?id|national.?identification|social.?security|f(?:ø|o)dselsnummer|henkilotunnus|henkilötunnus/i],
   ['phone', /phone|mobile|\btel\b|telephone/i],
   ['firstName', /first.?name|given.?name|\bfname\b|forename/i],
   ['lastName', /last.?name|family.?name|surname|\blname\b/i],

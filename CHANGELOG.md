@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-06-04
+
+### Added
+- Dedicated **Personal number** menu category that fills only the `ssn` field in
+  one click (separate from Customer identity, which also includes it).
+- Test personal numbers for the Generic and Nets providers (previously only
+  Klarna, Svea, and Qliro shipped one).
+- Broader personal-number field matching: `ssn`, `pnr`, `nin`, `fnr`, `cpr`,
+  `hetu`/`henkilotunnus`, `fodselsnummer`/`fødselsnummer`, `personnummer`,
+  `national id`/`national identification`, `person id`, `social security`
+  (short tokens use lookarounds to avoid matching as substrings of other words).
+
 ### Fixed
 - Context menu no longer throws "Cannot create item with duplicate id" on
   install/reload. Menu rebuilds are now serialized (`createMenuRebuilder`) so the
@@ -34,5 +46,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `dist/firefox` (MV3 background scripts + `browser_specific_settings.gecko`).
 - Vitest + jsdom test suite for the schema, matcher, and filler modules.
 
-[Unreleased]: https://example.com/CheckoutFiller/compare/v0.1.0...HEAD
-[0.1.0]: https://example.com/CheckoutFiller/releases/tag/v0.1.0
+[Unreleased]: https://github.com/codedeviate/CheckoutFiller/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/codedeviate/CheckoutFiller/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/codedeviate/CheckoutFiller/releases/tag/v0.1.0

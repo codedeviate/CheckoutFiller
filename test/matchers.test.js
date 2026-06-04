@@ -26,6 +26,21 @@ describe('detectLogicalKey', () => {
     expect(detectLogicalKey(input('<input name="zipCode">'))).toBe('postalCode');
   });
 
+  it('matches Nordic / international personal-number field variants', () => {
+    expect(detectLogicalKey(input('<input name="ssn">'))).toBe('ssn');
+    expect(detectLogicalKey(input('<input name="customer_pnr">'))).toBe('ssn');
+    expect(detectLogicalKey(input('<input name="fodselsnummer">'))).toBe('ssn');
+    expect(detectLogicalKey(input('<input id="fødselsnummer">'))).toBe('ssn');
+    expect(detectLogicalKey(input('<input name="cpr">'))).toBe('ssn');
+    expect(detectLogicalKey(input('<input name="hetu">'))).toBe('ssn');
+    expect(detectLogicalKey(input('<input placeholder="National identification number">'))).toBe('ssn');
+  });
+
+  it('does not match personal-number tokens as substrings of unrelated names', () => {
+    expect(detectLogicalKey(input('<input name="running">'))).toBeNull(); // embeds "nin"
+    expect(detectLogicalKey(input('<input name="classname">'))).toBeNull(); // embeds "ssn"
+  });
+
   it('matches via associated label text', () => {
     const el = input('<label for="x">First name</label><input id="x">');
     expect(detectLogicalKey(el)).toBe('firstName');

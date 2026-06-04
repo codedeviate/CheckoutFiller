@@ -10,10 +10,14 @@ const CARD_KEYS = ['cardNumber', 'cardExp', 'cardCvc', 'cardName'];
 const IDENTITY_KEYS = ['email', 'phone', 'firstName', 'lastName', 'ssn'];
 const ADDRESS_KEYS = ['address1', 'postalCode', 'city', 'country'];
 
+// Object key order defines the context-menu order. `ssn` is a dedicated
+// quick-fill that overlaps `identity` (which also includes ssn) — intentional.
+// `all` is the full union and stays last.
 export const CATEGORIES = {
   card: CARD_KEYS,
   identity: IDENTITY_KEYS,
   address: ADDRESS_KEYS,
+  ssn: ['ssn'],
   all: [...IDENTITY_KEYS, ...ADDRESS_KEYS, ...CARD_KEYS],
 };
 
@@ -21,6 +25,7 @@ export const CATEGORY_LABELS = {
   card: 'Card / payment',
   identity: 'Customer identity',
   address: 'Address',
+  ssn: 'Personal number',
   all: 'Fill everything',
 };
 
