@@ -35,6 +35,7 @@ $('save').addEventListener('click', async () => {
   if (!parsed) return;
   try {
     await saveConfig(parsed);
+    syncAutoRefillCheckbox(parsed);
     setStatus('Saved.');
   } catch (e) {
     setStatus(e.message, false);

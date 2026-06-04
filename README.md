@@ -146,6 +146,8 @@ install.
 ```jsonc
 {
   "version": 2,
+  // optional global settings
+  "settings": { "autoRefill": false },
   "providers": {
     "<provider-key>": {
       "label": "Shown in the menu",
