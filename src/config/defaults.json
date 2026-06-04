@@ -1,5 +1,8 @@
 {
   "version": 2,
+  "settings": {
+    "autoRefill": false
+  },
   "providers": {
     "generic": {
       "label": "Generic test card",
