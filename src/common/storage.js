@@ -1,6 +1,6 @@
 import browser from 'webextension-polyfill';
 import defaults from '../config/defaults.json';
-import { validateConfig } from './schema.js';
+import { validateConfig, migrateConfig } from './schema.js';
 
 export const CONFIG_KEY = 'checkoutfiller.config';
 
@@ -10,7 +10,7 @@ export function getDefaults() {
 
 export async function loadConfig() {
   const stored = await browser.storage.local.get(CONFIG_KEY);
-  return stored[CONFIG_KEY] || defaults;
+  return migrateConfig(stored[CONFIG_KEY] || defaults);
 }
 
 export async function saveConfig(config) {
