@@ -6,12 +6,16 @@ export const LOGICAL_KEYS = [
   'cardNumber', 'cardExp', 'cardCvc', 'cardName',
 ];
 
+const CARD_KEYS = ['cardNumber', 'cardExp', 'cardCvc', 'cardName'];
+const IDENTITY_KEYS = ['email', 'phone', 'firstName', 'lastName', 'ssn'];
+const ADDRESS_KEYS = ['address1', 'postalCode', 'city', 'country'];
+
 export const CATEGORIES = {
-  card: ['cardNumber', 'cardExp', 'cardCvc', 'cardName'],
-  identity: ['email', 'phone', 'firstName', 'lastName', 'ssn'],
-  address: ['address1', 'postalCode', 'city', 'country'],
+  card: CARD_KEYS,
+  identity: IDENTITY_KEYS,
+  address: ADDRESS_KEYS,
+  all: [...IDENTITY_KEYS, ...ADDRESS_KEYS, ...CARD_KEYS],
 };
-CATEGORIES.all = [...CATEGORIES.identity, ...CATEGORIES.address, ...CATEGORIES.card];
 
 export const CATEGORY_LABELS = {
   card: 'Card / payment',
@@ -25,12 +29,12 @@ export function keysForCategory(cat) {
 }
 
 export function fieldsForCategory(providerFields, cat) {
-  const out = {};
+  const result = {};
   for (const k of keysForCategory(cat)) {
     const v = providerFields ? providerFields[k] : undefined;
-    if (v != null && v !== '') out[k] = v;
+    if (v != null && v !== '') result[k] = v;
   }
-  return out;
+  return result;
 }
 
 export function validateConfig(config) {

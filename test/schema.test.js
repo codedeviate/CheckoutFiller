@@ -20,6 +20,11 @@ describe('categories', () => {
     expect(keysForCategory('all').sort()).toEqual([...LOGICAL_KEYS].sort());
   });
 
+  it('"all" has no duplicate keys', () => {
+    const all = keysForCategory('all');
+    expect(new Set(all).size).toBe(all.length);
+  });
+
   it('labels every category including all', () => {
     for (const cat of ['card', 'identity', 'address', 'all']) {
       expect(CATEGORY_LABELS[cat]).toBeTruthy();
