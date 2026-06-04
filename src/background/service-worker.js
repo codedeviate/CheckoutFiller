@@ -1,6 +1,6 @@
 import browser from 'webextension-polyfill';
 import { loadConfig, seedDefaults, CONFIG_KEY } from '../common/storage.js';
-import { fieldsForCategory } from '../common/schema.js';
+import { fieldsForCategory, scenarioFields } from '../common/schema.js';
 import { parseMenuId, createMenuRebuilder } from './menus.js';
 
 // Serialized so overlapping triggers (onInstalled + the seed-write's
@@ -43,11 +43,11 @@ browser.contextMenus.onClicked.addListener(async (info, tab) => {
   if (!tab) return;
   const parsed = parseMenuId(String(info.menuItemId));
   if (!parsed) return;
-  const { pkey, cat } = parsed;
+  const { pkey, scenario, cat } = parsed;
   const config = await loadConfig();
   const provider = config.providers[pkey];
   if (!provider) return;
-  const fields = fieldsForCategory(provider.fields, cat);
+  const fields = fieldsForCategory(scenarioFields(provider, scenario), cat);
   try {
     const res = await browser.tabs.sendMessage(
       tab.id,
