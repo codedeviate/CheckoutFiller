@@ -78,8 +78,8 @@ export function createAutoRefiller(scope, fields, options = {}) {
   function disarm() {
     if (!armed) return;
     armed = false;
-    if (timer) clearTimeout(timer);
-    if (observer) observer.disconnect();
+    if (timer) { clearTimeout(timer); timer = null; }
+    if (observer) { observer.disconnect(); observer = null; }
   }
 
   function resetTimer() {
