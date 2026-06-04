@@ -33,7 +33,7 @@ const NAME_PATTERNS = [
   ['plusgiro', /plusgiro|postgiro/i],
   ['bankAccount', /account.?(?:no|nr|number)|kontonummer|bankkonto|(?<![a-z])konto(?![a-z])/i],
   ['email', /e.?mail/i],
-  ['ssn', /(?<![a-z])(?:ssn|pnr|nin|fnr|cpr|hetu)(?![a-z])|personnummer|personal.?number|person.?id|national.?id|national.?identification|social.?security|f(?:ø|o)dselsnummer|henkilotunnus|henkilötunnus/i],
+  ['ssn', /(?<![a-z])(?:ssn|pnr|nin|fnr|cpr|hetu|orgno|orgnr)(?![a-z])|personnummer|personal.?number|person.?id|national.?id|national.?identification|social.?security|f(?:ø|o)dselsnummer|henkilotunnus|henkilötunnus|org.?number|org.?nummer|organisationsnummer|organi[sz]ation.?number/i],
   ['phone', /phone|mobile|\btel\b|telephone/i],
   ['firstName', /first.?name|given.?name|\bfname\b|forename/i],
   ['lastName', /last.?name|family.?name|surname|\blname\b/i],

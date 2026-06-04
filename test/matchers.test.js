@@ -36,9 +36,19 @@ describe('detectLogicalKey', () => {
     expect(detectLogicalKey(input('<input placeholder="National identification number">'))).toBe('ssn');
   });
 
+  it('matches org-number field names (NEH uses orgno for both persons and companies)', () => {
+    expect(detectLogicalKey(input('<input name="orgno">'))).toBe('ssn');
+    expect(detectLogicalKey(input('<input name="customer_orgno">'))).toBe('ssn');
+    expect(detectLogicalKey(input('<input name="orgnr">'))).toBe('ssn');
+    expect(detectLogicalKey(input('<input name="org_number">'))).toBe('ssn');
+    expect(detectLogicalKey(input('<input placeholder="Organisationsnummer">'))).toBe('ssn');
+    expect(detectLogicalKey(input('<input placeholder="Organization number">'))).toBe('ssn');
+  });
+
   it('does not match personal-number tokens as substrings of unrelated names', () => {
     expect(detectLogicalKey(input('<input name="running">'))).toBeNull(); // embeds "nin"
     expect(detectLogicalKey(input('<input name="classname">'))).toBeNull(); // embeds "ssn"
+    expect(detectLogicalKey(input('<input name="organizer">'))).toBeNull(); // "org" but not an org-number
   });
 
   it('matches via associated label text', () => {

@@ -10,6 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - MIT license.
 
+## [0.5.1] - 2026-06-05
+
+### Fixed
+- Recognize `orgno` / `orgnr` / `org number` / `organisationsnummer` field names
+  (→ `ssn`). The NEH platform names its personal-number field `orgno` because the
+  same field is used for company org numbers; the matcher now fills it.
+
 ## [0.5.0] - 2026-06-04
 
 ### Added
@@ -142,7 +149,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `dist/firefox` (MV3 background scripts + `browser_specific_settings.gecko`).
 - Vitest + jsdom test suite for the schema, matcher, and filler modules.
 
-[Unreleased]: https://github.com/codedeviate/CheckoutFiller/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/codedeviate/CheckoutFiller/compare/v0.5.1...HEAD
+[0.5.1]: https://github.com/codedeviate/CheckoutFiller/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.4...v0.5.0
 [0.4.4]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.2...v0.4.3
