@@ -45,6 +45,7 @@ $('reset').addEventListener('click', async () => {
   if (!confirm('Reset config to shipped defaults?')) return;
   await saveConfig(getDefaults());
   render(getDefaults());
+  syncAutoRefillCheckbox(getDefaults());
   setStatus('Reset to defaults.');
 });
 
@@ -78,7 +79,35 @@ $('file').addEventListener('change', async (e) => {
   }
   await saveConfig(parsed);
   render(parsed);
+  syncAutoRefillCheckbox(parsed);
   setStatus('Imported.');
 });
 
-loadConfig().then(render);
+function syncAutoRefillCheckbox(cfg) {
+  $('autoRefill').checked = !!(cfg && cfg.settings && cfg.settings.autoRefill);
+}
+
+$('autoRefill').addEventListener('change', async () => {
+  const parsed = parseEditor();
+  if (!parsed) {
+    // editor JSON is invalid; revert the checkbox to the stored value
+    syncAutoRefillCheckbox(await loadConfig());
+    return;
+  }
+  parsed.settings = { ...(parsed.settings || {}), autoRefill: $('autoRefill').checked };
+  try {
+    await saveConfig(parsed);
+    render(parsed);
+    setStatus('Saved.');
+  } catch (e) {
+    setStatus(e.message, false);
+  }
+});
+
+async function init() {
+  const cfg = await loadConfig();
+  render(cfg);
+  syncAutoRefillCheckbox(cfg);
+}
+
+init();

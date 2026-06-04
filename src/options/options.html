@@ -10,6 +10,12 @@
     <h1>CheckoutFiller</h1>
     <p>Edit the JSON config below. Each provider maps logical field keys to test values.</p>
     <textarea id="config" spellcheck="false"></textarea>
+    <p class="row">
+      <label>
+        <input type="checkbox" id="autoRefill" />
+        Keep filling fields that appear within 15s (for step-by-step checkouts like Qliro)
+      </label>
+    </p>
     <div class="row">
       <button id="save">Save</button>
       <button id="reset">Reset to defaults</button>
