@@ -24,6 +24,13 @@ describe('fillElement', () => {
     expect(el.value).toBe('NO');
   });
 
+  it('matches a select option via substring fallback', () => {
+    document.body.innerHTML = '<select id="c"><option value="SE">Sweden</option><option value="NO">Norway</option></select>';
+    const el = document.getElementById('c');
+    expect(fillElement(el, 'Swe')).toBe(true);
+    expect(el.value).toBe('SE');
+  });
+
   it('returns false when no select option matches', () => {
     document.body.innerHTML = '<select id="c"><option value="SE">Sweden</option></select>';
     expect(fillElement(document.getElementById('c'), 'ZZ')).toBe(false);

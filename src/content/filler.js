@@ -10,10 +10,20 @@ export function findFormScope(el, doc) {
 }
 
 export function setNativeValue(el, value) {
-  const proto = Object.getPrototypeOf(el);
-  const desc = Object.getOwnPropertyDescriptor(proto, 'value');
-  if (desc && desc.set) desc.set.call(el, value);
-  else el.value = value;
+  // Walk the prototype chain to the native `value` setter. React stashes the
+  // previous value in a closure on that setter, so a plain `el.value =` would
+  // be swallowed as a no-op. Custom elements can add chain levels, so we don't
+  // assume the setter lives on the immediate prototype.
+  let proto = Object.getPrototypeOf(el);
+  while (proto && proto !== Object.prototype) {
+    const desc = Object.getOwnPropertyDescriptor(proto, 'value');
+    if (desc && desc.set) {
+      desc.set.call(el, value);
+      return;
+    }
+    proto = Object.getPrototypeOf(proto);
+  }
+  el.value = value;
 }
 
 function fireEvents(el) {
