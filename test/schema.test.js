@@ -26,7 +26,7 @@ describe('categories', () => {
   });
 
   it('labels every category including all', () => {
-    for (const cat of ['card', 'identity', 'address', 'ssn', 'all']) {
+    for (const cat of ['card', 'identity', 'address', 'ssn', 'bank', 'all']) {
       expect(CATEGORY_LABELS[cat]).toBeTruthy();
     }
   });
@@ -34,6 +34,19 @@ describe('categories', () => {
   it('has a dedicated personal-number (ssn) category', () => {
     expect(keysForCategory('ssn')).toEqual(['ssn']);
     expect(CATEGORY_LABELS.ssn).toBe('Personal number');
+  });
+
+  it('has a bank/account category with the six bank keys', () => {
+    expect(keysForCategory('bank')).toEqual([
+      'bankClearing', 'bankAccount', 'iban', 'bic', 'bankgiro', 'plusgiro',
+    ]);
+    expect(CATEGORY_LABELS.bank).toBe('Bank / account');
+  });
+
+  it('includes bank keys in "all"', () => {
+    for (const k of ['bankClearing', 'bankAccount', 'iban', 'bic', 'bankgiro', 'plusgiro']) {
+      expect(keysForCategory('all')).toContain(k);
+    }
   });
 });
 

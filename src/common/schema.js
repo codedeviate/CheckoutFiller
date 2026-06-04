@@ -1,14 +1,16 @@
-export const CONFIG_VERSION = 1;
+export const CONFIG_VERSION = 2;
 
 export const LOGICAL_KEYS = [
   'email', 'phone', 'firstName', 'lastName', 'ssn',
   'address1', 'postalCode', 'city', 'country',
   'cardNumber', 'cardExp', 'cardCvc', 'cardName',
+  'bankClearing', 'bankAccount', 'iban', 'bic', 'bankgiro', 'plusgiro',
 ];
 
 const CARD_KEYS = ['cardNumber', 'cardExp', 'cardCvc', 'cardName'];
 const IDENTITY_KEYS = ['email', 'phone', 'firstName', 'lastName', 'ssn'];
 const ADDRESS_KEYS = ['address1', 'postalCode', 'city', 'country'];
+const BANK_KEYS = ['bankClearing', 'bankAccount', 'iban', 'bic', 'bankgiro', 'plusgiro'];
 
 // Object key order defines the context-menu order. `ssn` is a dedicated
 // quick-fill that overlaps `identity` (which also includes ssn) — intentional.
@@ -18,7 +20,8 @@ export const CATEGORIES = {
   identity: IDENTITY_KEYS,
   address: ADDRESS_KEYS,
   ssn: ['ssn'],
-  all: [...IDENTITY_KEYS, ...ADDRESS_KEYS, ...CARD_KEYS],
+  bank: BANK_KEYS,
+  all: [...IDENTITY_KEYS, ...ADDRESS_KEYS, ...CARD_KEYS, ...BANK_KEYS],
 };
 
 export const CATEGORY_LABELS = {
@@ -26,6 +29,7 @@ export const CATEGORY_LABELS = {
   identity: 'Customer identity',
   address: 'Address',
   ssn: 'Personal number',
+  bank: 'Bank / account',
   all: 'Fill everything',
 };
 
