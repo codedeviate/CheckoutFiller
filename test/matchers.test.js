@@ -129,4 +129,18 @@ describe('detectLogicalKey', () => {
     expect(detectLogicalKey(input('<input name="caribana">'))).toBeNull(); // embeds "iban"
     expect(detectLogicalKey(input('<input name="cubicle">'))).toBeNull();  // embeds "bic"
   });
+
+  it('matches company-name fields', () => {
+    expect(detectLogicalKey(input('<input name="company">'))).toBe('companyName');
+    expect(detectLogicalKey(input('<input name="companyName">'))).toBe('companyName');
+    expect(detectLogicalKey(input('<input name="company_name">'))).toBe('companyName');
+    expect(detectLogicalKey(input('<input placeholder="Företag">'))).toBe('companyName');
+    expect(detectLogicalKey(input('<input placeholder="Business name">'))).toBe('companyName');
+  });
+
+  it('keeps company name distinct from org number and unrelated words', () => {
+    expect(detectLogicalKey(input('<input name="accompany">'))).toBeNull();
+    expect(detectLogicalKey(input('<input name="confirm">'))).toBeNull();
+    expect(detectLogicalKey(input('<input name="orgno">'))).toBe('ssn');
+  });
 });

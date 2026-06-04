@@ -37,6 +37,7 @@ const NAME_PATTERNS = [
   ['phone', /phone|mobile|\btel\b|telephone/i],
   ['firstName', /first.?name|given.?name|\bfname\b|forename/i],
   ['lastName', /last.?name|family.?name|surname|\blname\b/i],
+  ['companyName', /\bcompany\b|company.?name|f(?:ö|o)retag|business.?name|\bfirm\b/i],
   ['postalCode', /post(al)?.?code|zip.?code|\bzip\b/i],
   ['city', /\bcity\b|\btown\b|\bort\b/i],
   ['address1', /address|street|\baddr\b|adress/i],
