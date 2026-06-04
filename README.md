@@ -127,6 +127,10 @@ via the extensions page). The options page is the source of truth:
 - **Edit** the config as JSON and **Save** (validated before storing).
 - **Reset to defaults** restores the shipped credentials.
 - **Export JSON** downloads your current config; **Import JSON** loads one back.
+- **Keep filling (auto-refill)** — an optional checkbox. When on, after you trigger
+  a fill the extension keeps filling fields that appear within 15s in the same
+  frame, from the same selection. Useful for step-by-step checkouts (e.g. Qliro)
+  that reveal fields one at a time instead of all at once. Off by default.
 
 Config is stored per-browser in `storage.local`. The shipped defaults live in
 [`src/config/defaults.json`](src/config/defaults.json) and seed storage on first

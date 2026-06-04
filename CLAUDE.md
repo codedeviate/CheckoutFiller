@@ -89,6 +89,12 @@ are verified by loading the extension. Tests cover only the pure modules.
 - **Two manifests** are generated from `manifest.base.json` in `build.js`: Chrome
   uses `background.service_worker`; Firefox uses `background.scripts` +
   `browser_specific_settings.gecko`. esbuild outputs IIFE bundles that work for both.
+- **Auto-refill** is opt-in via `settings.autoRefill` (default off;
+  `autoRefillEnabled(config)` in schema.js). When on, the background sends
+  `autoRefill: true` with the fill message and `content/index.js` arms
+  `createAutoRefiller(document, fields)` (filler.js) — a MutationObserver that
+  re-runs `fillScope` on newly-revealed empty fields for a sliding 15s window
+  (same frame only; self-disarms on idle/navigation; a new fill replaces it).
 
 ### Adding a provider
 

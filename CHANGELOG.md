@@ -10,6 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - MIT license.
 
+## [0.5.0] - 2026-06-04
+
+### Added
+- **Opt-in auto-refill** (off by default; toggle on the options page). After you
+  trigger a fill, the extension keeps filling newly-revealed recognized fields in
+  the same frame from the same selection for a sliding 15s window — so step-by-step
+  checkouts like Qliro fill through their steps from one action. Only fills empty
+  fields, same frame only, and self-disarms after 15s idle or on navigation.
+
 ## [0.4.4] - 2026-06-04
 
 ### Added
@@ -133,7 +142,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `dist/firefox` (MV3 background scripts + `browser_specific_settings.gecko`).
 - Vitest + jsdom test suite for the schema, matcher, and filler modules.
 
-[Unreleased]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.4...HEAD
+[Unreleased]: https://github.com/codedeviate/CheckoutFiller/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.4...v0.5.0
 [0.4.4]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/codedeviate/CheckoutFiller/compare/v0.4.1...v0.4.2
