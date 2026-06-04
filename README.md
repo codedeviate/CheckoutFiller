@@ -72,6 +72,37 @@ Chrome.
 
 ---
 
+## Distribute to colleagues
+
+Releases are the distribution channel. Pushing a version tag builds, tests, and
+attaches per-browser zips to a GitHub Release automatically (see
+`.github/workflows/release.yml`):
+
+```bash
+# bump the version in package.json + src/manifest.base.json, commit, then:
+git tag v0.4.0
+git push origin v0.4.0      # CI builds, tests, and publishes the Release with zips
+```
+
+Colleagues then:
+
+1. Open the repo's **Releases** page and download `checkoutfiller-chrome-<version>.zip`
+   (or `…-firefox-<version>.zip`).
+2. Unzip it.
+3. **Chrome / Arc:** `chrome://extensions` → Developer mode → **Load unpacked** →
+   select the unzipped `chrome` folder. **Firefox / Zen:** `about:debugging` →
+   **Load Temporary Add-on** → pick `firefox/manifest.json`.
+
+Updating is the same flow with the newer zip (remove the old unpacked entry first,
+or just reload). To build the zips locally without CI: `npm run package` →
+`dist/checkoutfiller-chrome-<version>.zip` and `…-firefox-<version>.zip`.
+
+> For hands-off auto-updates across the office you'd need managed Chrome
+> (`ExtensionInstallForcelist` policy) or a store listing; the zip + Load-unpacked
+> flow above is the no-infrastructure option.
+
+---
+
 ## Usage
 
 1. Open a checkout page (or `examples/sample-checkout.html` from this repo).
