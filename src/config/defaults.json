@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "providers": {
+    "generic": {
+      "label": "Generic test card",
+      "fields": {
+        "email": "test@example.com",
+        "phone": "0701234567",
+        "firstName": "Test",
+        "lastName": "Persson",
+        "address1": "Storgatan 1",
+        "postalCode": "11122",
+        "city": "Stockholm",
+        "country": "SE",
+        "cardNumber": "4242 4242 4242 4242",
+        "cardExp": "12/30",
+        "cardCvc": "123",
+        "cardName": "Test Persson"
+      }
+    },
+    "klarna-kco": {
+      "label": "Klarna (KCO)",
+      "fields": {
+        "email": "customer@email.se",
+        "phone": "0701234567",
+        "firstName": "Test",
+        "lastName": "Persson",
+        "ssn": "4106288989",
+        "address1": "Sveavagen 1",
+        "postalCode": "11157",
+        "city": "Stockholm",
+        "country": "SE",
+        "cardNumber": "4111 1111 1111 1111",
+        "cardExp": "12/30",
+        "cardCvc": "123",
+        "cardName": "Test Persson"
+      }
+    },
+    "svea-sco": {
+      "label": "Svea Checkout (SCO)",
+      "fields": {
+        "email": "test@svea.com",
+        "phone": "0701111111",
+        "firstName": "Test",
+        "lastName": "Testsson",
+        "ssn": "194605092222",
+        "address1": "Gata 1",
+        "postalCode": "11122",
+        "city": "Stockholm",
+        "country": "SE"
+      }
+    },
+    "nets": {
+      "label": "Nets / Nexi",
+      "fields": {
+        "email": "test@nets.eu",
+        "phone": "0702222222",
+        "firstName": "Test",
+        "lastName": "Nets",
+        "address1": "Klarabergsgatan 60",
+        "postalCode": "11121",
+        "city": "Stockholm",
+        "country": "SE",
+        "cardNumber": "4925 0000 0000 0004",
+        "cardExp": "12/30",
+        "cardCvc": "123",
+        "cardName": "Test Nets"
+      }
+    },
+    "qliro": {
+      "label": "Qliro",
+      "fields": {
+        "email": "test@qliro.com",
+        "phone": "0703333333",
+        "firstName": "Test",
+        "lastName": "Qliro",
+        "ssn": "195401019896",
+        "address1": "Sankt Eriksgatan 1",
+        "postalCode": "11220",
+        "city": "Stockholm",
+        "country": "SE"
+      }
+    }
+  }
+}
