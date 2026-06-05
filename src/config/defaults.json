@@ -9,17 +9,17 @@
       "fields": {
         "email": "test@example.com",
         "phone": "0701234567",
-        "firstName": "Test",
-        "lastName": "Persson",
+        "firstName": "Tess",
+        "lastName": "T Person",
         "ssn": "199001011234",
         "address1": "Storgatan 1",
         "postalCode": "11122",
         "city": "Stockholm",
         "country": "SE",
         "cardNumber": "4242 4242 4242 4242",
-        "cardExp": "12/30",
+        "cardExp": "12/34",
         "cardCvc": "123",
-        "cardName": "Test Persson"
+        "cardName": "Test T Person"
       }
     },
     "kustom-kco": {
@@ -37,30 +37,53 @@
       },
       "scenarios": [
         { "label": "Invoice · Accepted", "fields": { "ssn": "194103219202" } },
-        { "label": "Invoice · Denied", "fields": { "ssn": "194110288083", "email": "customer+se+denied@klarna.com" } },
-        { "label": "Card · Accepted", "fields": { "cardNumber": "4111 1111 1111 1111", "cardExp": "12/30", "cardCvc": "123", "cardName": "Test Persson" } },
-        { "label": "B2B (company)", "fields": { "ssn": "556131-2058", "companyName": "Testbolaget AB" } }
+        {
+          "label": "Invoice · Denied",
+          "fields": {
+            "ssn": "194110288083",
+            "email": "customer+se+denied@klarna.com"
+          }
+        },
+        {
+          "label": "Card · Accepted",
+          "fields": {
+            "cardNumber": "4111 1111 1111 1111",
+            "cardExp": "12/30",
+            "cardCvc": "123",
+            "cardName": "Test Persson"
+          }
+        },
+        {
+          "label": "B2B (company)",
+          "fields": { "ssn": "556131-2058", "companyName": "Testbolaget AB" }
+        }
       ]
     },
     "svea-sco": {
       "label": "Svea Checkout (SCO)",
       "fields": {
         "email": "test@svea.com",
-        "phone": "0701111111",
-        "firstName": "Test",
-        "lastName": "Testsson",
+        "phone": "0811111111",
+        "firstName": "Tess",
+        "lastName": "T Persson",
         "ssn": "194605092222",
-        "address1": "Gata 1",
-        "postalCode": "11122",
-        "city": "Stockholm",
+        "address1": "Testgatan 1",
+        "postalCode": "99999",
+        "city": "Stan",
         "country": "SE"
       },
       "scenarios": [
         { "label": "Approved", "fields": { "ssn": "194605092222" } },
         { "label": "Denied", "fields": { "ssn": "194610081111" } },
         { "label": "Abuse / fraud flag", "fields": { "ssn": "194606082222" } },
-        { "label": "Credit limit reached", "fields": { "ssn": "194611071111" } },
-        { "label": "B2B (company)", "fields": { "ssn": "4608142222", "companyName": "Testbolaget AB" } }
+        {
+          "label": "Credit limit reached",
+          "fields": { "ssn": "194611071111" }
+        },
+        {
+          "label": "B2B (company)",
+          "fields": { "ssn": "4608142222", "companyName": "Testbolaget AB" }
+        }
       ]
     },
     "nets": {
@@ -76,7 +99,7 @@
         "city": "Stockholm",
         "country": "SE",
         "cardNumber": "4268 2700 8737 4847",
-        "cardExp": "12/30",
+        "cardExp": "12/34",
         "cardCvc": "123",
         "cardName": "Test Nets"
       }
@@ -94,7 +117,7 @@
         "city": "Stockholm",
         "country": "SE",
         "cardNumber": "4111 1111 1111 1111",
-        "cardExp": "12/30",
+        "cardExp": "12/34",
         "cardCvc": "123",
         "cardName": "Test Qliro"
       },
@@ -102,7 +125,10 @@
         { "label": "Approved", "fields": { "ssn": "197906255307" } },
         { "label": "On hold", "fields": { "ssn": "197705301773" } },
         { "label": "Denied", "fields": { "ssn": "197504208104" } },
-        { "label": "B2B (company)", "fields": { "ssn": "556001-1982", "companyName": "Testbolaget AB" } }
+        {
+          "label": "B2B (company)",
+          "fields": { "ssn": "556001-1982", "companyName": "Testbolaget AB" }
+        }
       ]
     },
     "swedbankpay": {
@@ -119,10 +145,21 @@
         "country": "SE"
       },
       "scenarios": [
-        { "label": "Card · Accepted", "fields": { "cardNumber": "4925 0000 0000 0004", "cardExp": "12/30", "cardCvc": "123", "cardName": "Test Swedbank" } },
+        {
+          "label": "Card · Accepted",
+          "fields": {
+            "cardNumber": "4925 0000 0000 0004",
+            "cardExp": "12/34",
+            "cardCvc": "123",
+            "cardName": "Test Swedbank"
+          }
+        },
         { "label": "Swish · Accepted", "fields": { "phone": "0739000001" } },
         { "label": "Invoice", "fields": { "ssn": "196003071161" } },
-        { "label": "Autogiro (unverified)", "fields": { "bankClearing": "8327-9", "bankAccount": "1234567890" } }
+        {
+          "label": "Autogiro (unverified)",
+          "fields": { "bankClearing": "8327-9", "bankAccount": "1234567890" }
+        }
       ]
     }
   }
